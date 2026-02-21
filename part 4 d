@@ -1,0 +1,17 @@
+@Test
+void divideByZeroThrows() {
+    Calculator c = new Calculator();
+    assertThrows(IllegalArgumentException.class, () -> c.divide(5.0, 0.0));
+}
+
+@Test
+void divideNegative() {
+    Calculator c = new Calculator();
+    assertEquals(-3.0, c.divide(-6.0, 2.0), 1e-9);
+}
+
+@Test
+void divideZeroNumerator() {
+    Calculator c = new Calculator();
+    assertEquals(0.0, c.divide(0.0, 5.0), 1e-9);
+}
