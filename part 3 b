@@ -1,0 +1,65 @@
+public class DeterministicAgent implements CatanAgent {
+
+    private int playerId;
+
+    @Override
+    public void init(int playerId) {
+        this.playerId = playerId;
+    }
+
+    @Override
+    public Move chooseInitialSettlement(GameState state) {
+        return state.getLegalInitialSettlements(playerId).get(0);
+    }
+
+    @Override
+    public Move chooseInitialRoad(GameState state) {
+        return state.getLegalInitialRoads(playerId).get(0);
+    }
+
+    @Override
+    public Move chooseMove(GameState state) {
+        return state.getLegalMoves(playerId).get(0);
+    }
+
+    @Override
+    public Map<ResourceType, Integer> chooseDiscard(GameState state, int discardCount) {
+        return state.defaultDiscard(playerId, discardCount);
+    }
+
+    @Override
+    public ResourceType chooseResource(GameState state) {
+        return ResourceType.BRICK;
+    }
+
+    @Override
+    public int chooseRobberTarget(GameState state, List<Integer> possibleTargets) {
+        return possibleTargets.get(0);
+    }
+
+    @Override
+    public DevelopmentCard chooseDevelopmentCard(GameState state) {
+        return DevelopmentCard.KNIGHT;
+    }
+}
+
+\\ interface:
+public class GameEngine {
+
+    private List<CatanAgent> agents;
+    private GameState currentState;
+
+    public GameEngine(List<CatanAgent> agents, GameState initialState) {
+        this.agents = agents;
+        this.currentState = initialState;
+    }
+
+    public void playTurn(int playerIndex) {
+        CatanAgent agent = agents.get(playerIndex);
+        Move move = agent.chooseMove(currentState);
+        applyMove(move);
+    }
+    
+    private void applyMove(Move move) {
+}
+}
