@@ -1,0 +1,11 @@
+@Test
+void divideBasic() {
+    Calculator c = new Calculator();
+    assertEquals(3.0, c.divide(6.0, 2.0), 1e-9);
+}
+
+@Test
+void divideFractional() {
+    Calculator c = new Calculator();
+    assertEquals(0.5, c.divide(1.0, 2.0), 1e-9);
+}
